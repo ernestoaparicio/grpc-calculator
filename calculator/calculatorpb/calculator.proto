@@ -19,4 +19,6 @@ message CalculatorResponse {
 service CalculatorService{
     //Unary
     rpc Calculator(CalculatorRequest) returns (CalculatorResponse){};
+    rpc CalculatorAdd(CalculatorRequest) returns (CalculatorResponse){};
+    rpc CalculatorSubtract(CalculatorRequest) returns (CalculatorResponse){};
 }

@@ -11,13 +11,43 @@ import (
 
 type server struct{}
 
+func (server) CalculatorAdd(ctx context.Context, req *calculatorpb.CalculatorRequest) (*calculatorpb.CalculatorResponse, error) {
+	fmt.Printf("CalculatorAdd function was invoked with: %v", req)
+
+	firstNumber := req.GetInputNumbers().GetNumber_1()
+	secondNumber := req.GetInputNumbers().GetNumber_2()
+
+	result := firstNumber + secondNumber
+
+	res := &calculatorpb.CalculatorResponse{
+		Result: result,
+	}
+
+	return res, nil
+}
+
+func (server) CalculatorSubtract(ctx context.Context, req *calculatorpb.CalculatorRequest) (*calculatorpb.CalculatorResponse, error) {
+	fmt.Printf("CalculatorAdd function was invoked with: %v", req)
+
+	firstNumber := req.GetInputNumbers().GetNumber_1()
+	secondNumber := req.GetInputNumbers().GetNumber_2()
+
+	result := firstNumber - secondNumber
+
+	res := &calculatorpb.CalculatorResponse{
+		Result: result,
+	}
+
+	return res, nil
+}
+
 func (server) Calculator(ctx context.Context, req *calculatorpb.CalculatorRequest) (*calculatorpb.CalculatorResponse, error) {
 	fmt.Printf("Calculator function was invoked with: %v", req)
 
 	firstNumber := req.GetInputNumbers().GetNumber_1()
 	secondNumber := req.GetInputNumbers().GetNumber_2()
 
-	result := firstNumber + secondNumber
+	result := firstNumber * secondNumber
 
 	res := &calculatorpb.CalculatorResponse{
 		Result: result,

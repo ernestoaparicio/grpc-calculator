@@ -21,11 +21,12 @@ func main()  {
 
 	c := calculatorpb.NewCalculatorServiceClient(cc)
 
-	doUnary(c)
+	doAdd(c)
+	doSub(c)
 }
 
-func doUnary(c calculatorpb.CalculatorServiceClient)  {
-	fmt.Println("Starting Unary RPC")
+func doAdd(c calculatorpb.CalculatorServiceClient)  {
+	fmt.Println("Starting Unary CalculatorAdd RPC")
 
 	req := &calculatorpb.CalculatorRequest{
 		InputNumbers: &calculatorpb.InputNumbers{
@@ -34,10 +35,29 @@ func doUnary(c calculatorpb.CalculatorServiceClient)  {
 		},
 	}
 
-	res, err := c.Calculator(context.Background(), req)
+	res, err := c.CalculatorAdd(context.Background(), req)
 
 	if err != nil{
-		log.Fatalf("Error while calling Calculator RPC: %v", err)
+		log.Fatalf("Error while calling CalculatorAdd RPC: %v", err)
+	}
+
+	log.Printf("Response from calculator: %v", res.Result)
+}
+
+func doSub(c calculatorpb.CalculatorServiceClient)  {
+	fmt.Println("Starting Unary CalculatorSub RPC")
+
+	req := &calculatorpb.CalculatorRequest{
+		InputNumbers: &calculatorpb.InputNumbers{
+			Number_1:2,
+			Number_2:2,
+		},
+	}
+
+	res, err := c.CalculatorSubtract(context.Background(), req)
+
+	if err != nil{
+		log.Fatalf("Error while calling CalculatorSub RPC: %v", err)
 	}
 
 	log.Printf("Response from calculator: %v", res.Result)
