@@ -9,7 +9,7 @@ message InputNumbers {
 }
 
 message CalculatorRequest {
-    InputNumbers numbers = 1;
+    InputNumbers inputNumbers = 1;
 }
 
 message CalculatorResponse {
